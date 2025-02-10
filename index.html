@@ -6,6 +6,7 @@
     <title>Celestara - My Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,6 +17,9 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#cv">CV</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#ai-work">AI Work</a></li>
+                <li><a href="#cycling">Cycling</a></li>
+                <li><a href="#adhyatma">Adhyatma</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -23,26 +27,78 @@
     
     <section id="home" class="hero">
         <h2>Welcome to Celestara</h2>
-        <p>Your gateway to my professional journey.</p>
+        <p>Your gateway to my professional and personal journey.</p>
+        <canvas id="three-canvas"></canvas>
     </section>
 
     <section id="cv" class="content-section">
         <h2>My CV</h2>
-        <p>Here is my professional experience and education details.</p>
+        <p>Sales analytics professional at Celestara, with expertise in AI-driven forecasting and business insights.</p>
     </section>
 
     <section id="projects" class="content-section">
         <h2>My Projects</h2>
-        <p>Explore the projects I have worked on.</p>
+        <p>Explore my projects in AI, sales analytics, and data science.</p>
+    </section>
+
+    <section id="ai-work" class="content-section">
+        <h2>AI Work</h2>
+        <p>Developed AI agents and implemented predictive models for business intelligence.</p>
+    </section>
+
+    <section id="cycling" class="content-section">
+        <h2>Pro Cycling Journey</h2>
+        <p>Training to become a professional cyclist while balancing my tech career.</p>
+    </section>
+
+    <section id="adhyatma" class="content-section">
+        <h2>Adhyatma (Spiritual Journey)</h2>
+        <p>Creating self-transformation programs based on the Upanishads and Ashtavakra Gita.</p>
     </section>
     
     <section id="contact" class="content-section">
         <h2>Contact Me</h2>
-        <p>Feel free to reach out for collaborations.</p>
+        <p>Feel free to reach out for collaborations or discussions.</p>
     </section>
     
     <footer>
         <p>&copy; 2025 Celestara</p>
     </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const canvas = document.getElementById("three-canvas");
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            
+            const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+            const material = new THREE.MeshStandardMaterial({ color: 0xffcc00 });
+            const torusKnot = new THREE.Mesh(geometry, material);
+            scene.add(torusKnot);
+            
+            const light = new THREE.PointLight(0xffffff);
+            light.position.set(50, 50, 50);
+            scene.add(light);
+            
+            camera.position.z = 50;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                torusKnot.rotation.x += 0.01;
+                torusKnot.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        });
+    </script>
 </body>
 </html>
